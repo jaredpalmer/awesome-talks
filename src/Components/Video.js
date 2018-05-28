@@ -1,10 +1,10 @@
+import React, { Component } from 'react'
 import styled, { injectGlobal } from 'styled-components'
 import is from 'styled-is'
-import { Component } from 'preact'
 import { Col } from 'react-styled-flexboxgrid'
 import Flex from 'styled-flex-component'
-import { Link } from 'preact-router/match'
-import Portal from 'preact-portal'
+import { Link } from 'react-router-dom'
+import { createPortal } from 'react-dom'
 import LazyLoad from 'react-lazyload'
 import remcalc from 'remcalc'
 
@@ -184,11 +184,12 @@ class VideoWarpper extends Component {
         <Description>{description}</Description>
       ) : null}
 
-      {cinemaMode ? (
-        <Portal into="body">
-          <Overlay onClick={this.toggleCinemaMode} />
-        </Portal>
-      ) : null}
+      {cinemaMode
+        ? createPortal(
+          <Overlay onClick={this.toggleCinemaMode} />,
+          document.getElementsByTagName('body')[0]
+        )
+        : null}
     </Column>
   )
 }
