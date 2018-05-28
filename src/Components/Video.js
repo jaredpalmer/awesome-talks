@@ -157,7 +157,7 @@ class VideoWarpper extends Component {
             <Tag
               key={s.id}
               activeClassName="active"
-              href={makeLink('category', s.name)}
+              top={makeLink('category', s.name)}
             >
               #{s.name.toLowerCase()}
             </Tag>
