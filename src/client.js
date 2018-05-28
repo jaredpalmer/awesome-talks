@@ -123,6 +123,7 @@ ensureReady(routes).then(data =>
     document.getElementById('root')
   )
 )
+require('offline-plugin/runtime').install()
 
 if (module.hot) {
   module.hot.accept()
