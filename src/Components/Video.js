@@ -142,11 +142,7 @@ class VideoWarpper extends Component {
           <Name>{this.videoTitle(name)}</Name>
           <Speaker>
             {speaker.map(s => (
-              <Link
-                key={s.id}
-                activeClassName="active"
-                to={makeLink('speaker', s.name)}
-              >
+              <Link key={s.id} to={makeLink('speaker', s.name)}>
                 <span>{s.name}</span>
               </Link>
             ))}
@@ -154,11 +150,7 @@ class VideoWarpper extends Component {
         </Flex>
         <Flex>
           {tags.map(s => (
-            <Tag
-              key={s.id}
-              activeClassName="active"
-              top={makeLink('category', s.name)}
-            >
+            <Tag key={s.id} to={makeLink('category', s.name)}>
               #{s.name.toLowerCase()}
             </Tag>
           ))}
@@ -174,9 +166,9 @@ class VideoWarpper extends Component {
 
         {this.state.cinemaMode
           ? createPortal(
-            <Overlay onClick={this.toggleCinemaMode} />,
-            document.getElementsByTagName('body')[0]
-          )
+              <Overlay onClick={this.toggleCinemaMode} />,
+              document.getElementsByTagName('body')[0]
+            )
           : null}
       </Column>
     )
