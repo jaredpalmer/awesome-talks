@@ -145,7 +145,7 @@ class VideoWarpper extends Component {
               <Link
                 key={s.id}
                 activeClassName="active"
-                href={makeLink('speaker', s.name)}
+                to={makeLink('speaker', s.name)}
               >
                 <span>{s.name}</span>
               </Link>

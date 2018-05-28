@@ -16,8 +16,6 @@ import './Utils/global-styles'
 import theme from './Utils/theme'
 import { WATCHED_KEY, FAV_KEY, getStorage } from './Utils/state'
 
-const window = {}
-
 const defaultState = {
   favorites: getStorage(FAV_KEY),
   watched: getStorage(WATCHED_KEY),
@@ -25,7 +23,11 @@ const defaultState = {
   search: ''
 }
 
-const cache = new InMemoryCache().restore(window.__APOLLO_STATE__)
+const cache = new InMemoryCache().restore(
+  typeof window !== 'undefined' ? window.__APOLLO_STATE__ : {}
+)
+
+console.log(typeof window !== 'undefined' ? window.__APOLLO_STATE__ : {})
 
 export const stateLink = withClientState({
   defaults: defaultState,
