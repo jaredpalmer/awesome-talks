@@ -174,9 +174,9 @@ class VideoWarpper extends Component {
 
         {this.state.cinemaMode
           ? createPortal(
-              <Overlay onClick={this.toggleCinemaMode} />,
-              document.getElementsByTagName('body')[0]
-            )
+            <Overlay onClick={this.toggleCinemaMode} />,
+            document.getElementsByTagName('body')[0]
+          )
           : null}
       </Column>
     )
