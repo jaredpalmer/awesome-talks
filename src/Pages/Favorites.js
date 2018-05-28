@@ -5,9 +5,11 @@ import Query from './../Components/Query'
 import Video from './../Components/Video'
 import GET_FAVORITES from '../Queries/GET_FAVORITES'
 import GET_VIDEO from '../Queries/GET_VIDEO'
+import Nav from './../Components/Nav'
 
 export default () => (
   <Grid>
+    <Nav />
     <Header title="Favorites" noSearch />
     <Row>
       <Col xs={12}>
