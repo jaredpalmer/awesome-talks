@@ -33,10 +33,10 @@ export const stateLink = withClientState({
     Mutation: {
       addFavorite: (_, { id }, { cache }) => {
         const query = gql`
-          query GetFavorites {
-            favorites @client
-          }
-        `
+                    query GetFavorites {
+                        favorites @client
+                    }
+                `
 
         const previous = cache.readQuery({ query })
         const data = {
@@ -49,10 +49,10 @@ export const stateLink = withClientState({
       },
       removeFavorite: (_, { id }, { cache }) => {
         const query = gql`
-          query GetFavorites {
-            favorites @client
-          }
-        `
+                    query GetFavorites {
+                        favorites @client
+                    }
+                `
 
         const previous = cache.readQuery({ query })
         const data = {
@@ -65,10 +65,10 @@ export const stateLink = withClientState({
       },
       addWatched: (_, { id }, { cache }) => {
         const query = gql`
-          query GetWatched {
-            watched @client
-          }
-        `
+                    query GetWatched {
+                        watched @client
+                    }
+                `
 
         const previous = cache.readQuery({ query })
         const data = {
@@ -81,10 +81,10 @@ export const stateLink = withClientState({
       },
       removeWatched: (_, { id }, { cache }) => {
         const query = gql`
-          query GetWatched {
-            watched @client
-          }
-        `
+                    query GetWatched {
+                        watched @client
+                    }
+                `
 
         const previous = cache.readQuery({ query })
         const data = {
@@ -123,7 +123,6 @@ ensureReady(routes).then(data =>
     document.getElementById('root')
   )
 )
-require('offline-plugin/runtime').install()
 
 if (module.hot) {
   module.hot.accept()
