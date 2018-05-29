@@ -89,100 +89,100 @@ injectGlobal`
 `
 
 const makeLink = (url = 'speaker', name = 'FIX ME') =>
-  `/${url}/${name.replace(/\s+/g, '-').toLowerCase()}`
+    `/${url}/${name.replace(/\s+/g, '-').toLowerCase()}`
 
 class VideoWrapper extends Component {
     state = { cinemaMode: false, showVideo: false }
 
     toggleCinemaMode = () => {
-      this.setState(({ cinemaMode }) => ({
-        cinemaMode: !cinemaMode,
-        showVideo: true
-      }))
-      document.body.classList.toggle('cinema-mode', this.state.cinemaMode)
+        this.setState(({ cinemaMode }) => ({
+            cinemaMode: !cinemaMode,
+            showVideo: true
+        }))
+        document.body.classList.toggle('cinema-mode', this.state.cinemaMode)
     }
 
     showVideo = () => {
-      this.setState(({ showVideo }) => ({
-        showVideo: true
-      }))
+        this.setState(({ showVideo }) => ({
+            showVideo: true
+        }))
     }
 
     endVideo = id => {
-      this.props.addWatched(id)
-      this.setState(({ showVideo }) => ({
-        showVideo: false
-      }))
+        this.props.addWatched(id)
+        this.setState(({ showVideo }) => ({
+            showVideo: false
+        }))
     }
 
     videoTitle = name => {
-      if (name.length > 100) return `${name.substring(0, 100)}...`
-      return name
+        if (name.length > 100) return `${name.substring(0, 100)}...`
+        return name
     }
 
     render = () => {
-      const { speaker, description, link, name, tags, id } = this.props
-      return (
-        <Column
-          cinemaMode={this.state.cinemaMode}
-          md={this.state.cinemaMode ? 12 : 4}
-          sm={this.state.cinemaMode ? 12 : 6}
-          xs={9}
-        >
-          <Player
-            showVideo={this.state.showVideo}
-            cinemaMode={this.state.cinemaMode}
-            id={id}
-            onClick={this.showVideo}
-            link={link}
-            name={name}
-            onEnd={() => this.endVideo(id)}
-          />
-          <Flex justifyBetween alignCenter>
-            <Name>{this.videoTitle(name)}</Name>
-            <Speaker>
-              {speaker.map(s => (
-                <Link key={s.id} to={makeLink('speaker', s.name)}>
-                  <span>{s.name}</span>
-                </Link>
-              ))}
-            </Speaker>
-          </Flex>
-          <Flex>
-            {tags.map(s => (
-              <Tag key={s.id} to={makeLink('category', s.name)}>
+        const { speaker, description, link, name, tags, id } = this.props
+        return (
+            <Column
+                cinemaMode={this.state.cinemaMode}
+                md={this.state.cinemaMode ? 12 : 4}
+                sm={this.state.cinemaMode ? 12 : 6}
+                xs={9}
+            >
+                <Player
+                    showVideo={this.state.showVideo}
+                    cinemaMode={this.state.cinemaMode}
+                    id={id}
+                    onClick={this.showVideo}
+                    link={link}
+                    name={name}
+                    onEnd={() => this.endVideo(id)}
+                />
+                <Flex justifyBetween alignCenter>
+                    <Name>{this.videoTitle(name)}</Name>
+                    <Speaker>
+                        {speaker.map(s => (
+                            <Link key={s.id} to={makeLink('speaker', s.name)}>
+                                <span>{s.name}</span>
+                            </Link>
+                        ))}
+                    </Speaker>
+                </Flex>
+                <Flex>
+                    {tags.map(s => (
+                        <Tag key={s.id} to={makeLink('category', s.name)}>
                             #{s.name.toLowerCase()}
-              </Tag>
-            ))}
-          </Flex>
+                        </Tag>
+                    ))}
+                </Flex>
 
-          <Button
-            name="Toggle Cinema Mode"
-            onClick={this.toggleCinemaMode}
-          >
-            {this.state.cinemaMode ? 'Turn Off' : 'Turn On'} Cinema Mode
-          </Button>
+                <Button
+                    name="Toggle Cinema Mode"
+                    onClick={this.toggleCinemaMode}
+                >
+                    {this.state.cinemaMode ? 'Turn Off' : 'Turn On'} Cinema Mode
+                </Button>
 
-          {this.state.cinemaMode && description ? (
-            <Description>{description}</Description>
-          ) : null}
+                {this.state.cinemaMode && description ? (
+                    <Description>{description}</Description>
+                ) : null}
 
-          {this.state.cinemaMode
-            ? createPortal(
-              <Overlay onClick={this.toggleCinemaMode} />,
-              document.getElementsByTagName('body')[0]
-            )
-            : null}
-        </Column>
-      )
+                {this.state.cinemaMode
+                    ? createPortal(
+                        <Overlay onClick={this.toggleCinemaMode} />,
+                        document.getElementsByTagName('body')[0]
+                    )
+                    : null}
+            </Column>
+        )
     }
 }
 
 export default ({ noLazy = false, talk }) =>
-  !process.browser ? (
-    <VideoWrapper key={talk.id} {...talk} />
-  ) : (
-    <LazyLoad height={310}>
-      <VideoWrapper key={talk.id} {...talk} />
-    </LazyLoad>
-  )
+    !process.browser ? (
+        <VideoWrapper key={talk.id} {...talk} />
+    ) : (
+        <LazyLoad height={310}>
+            <VideoWrapper key={talk.id} {...talk} />
+        </LazyLoad>
+    )

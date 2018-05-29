@@ -8,23 +8,29 @@ import GET_VIDEO from '../Queries/GET_VIDEO'
 import Nav from './../Components/Nav'
 
 export default () => (
-  <Grid>
-    <Nav />
-    <Header title="Favorites" noSearch />
-    <Row>
-      <Col xs={12}>
-        <Query query={GET_FAVORITES}>
-          {({ data: { favorites } }) => (
-            <Row>
-              {favorites.map(id => (
-                <Query key={id} query={GET_VIDEO} variables={{ id }}>
-                  {({ data: { Videos: v } }) => <Video key={v.id} {...v} />}
+    <Grid>
+        <Nav />
+        <Header title="Favorites" noSearch />
+        <Row>
+            <Col xs={12}>
+                <Query query={GET_FAVORITES}>
+                    {({ data: { favorites } }) => (
+                        <Row>
+                            {favorites.map(id => (
+                                <Query
+                                    key={id}
+                                    query={GET_VIDEO}
+                                    variables={{ id }}
+                                >
+                                    {({ data: { Videos: v } }) => (
+                                        <Video key={v.id} {...v} />
+                                    )}
+                                </Query>
+                            ))}
+                        </Row>
+                    )}
                 </Query>
-              ))}
-            </Row>
-          )}
-        </Query>
-      </Col>
-    </Row>
-  </Grid>
+            </Col>
+        </Row>
+    </Grid>
 )
