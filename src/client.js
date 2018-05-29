@@ -1,10 +1,6 @@
 import React from 'react'
 import { hydrate } from 'react-dom'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { ApolloClient } from 'apollo-client'
-import { HttpLink } from 'apollo-link-http'
-import { ApolloLink } from 'apollo-link'
-import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloProvider } from 'react-apollo'
 import { ThemeProvider } from 'styled-components'
 
@@ -19,19 +15,7 @@ import Favorites from './Pages/Favorites'
 
 import './Utils/global-styles'
 import theme from './Utils/theme'
-import stateLink from './Utils/stateLink'
-
-const client = new ApolloClient({
-    connectToDevTools: process.browser,
-    ssrMode: !process.browser,
-    link: ApolloLink.from([
-        stateLink,
-        new HttpLink({
-            uri: 'https://api.graphcms.com/simple/v1/cjhdcwrb98if90109o4pzawaq'
-        })
-    ]),
-    cache: new InMemoryCache()
-})
+import client from './Utils/stateLink'
 
 hydrate(
     <ApolloProvider client={client}>
